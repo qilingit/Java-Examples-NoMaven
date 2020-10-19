@@ -31,7 +31,7 @@ public class Stream<T, U> {
         List<T> result = new ArrayList<>();
 
         if(nb < 0) {
-            throw new IllegalArgumentException("Parmeter could not be negative");
+            throw new IllegalArgumentException("Parameter could not be negative");
         }
 
         if(nb > this.list.size()) {
@@ -58,10 +58,10 @@ public class Stream<T, U> {
         return new Stream<>(result);
     }
 
-    public <T> List<T> toList() {
-        List<T> result = new ArrayList<>();
+    public <Y> List<Y> toList() {
+        List<Y> result = new ArrayList<>();
         for(int i = 0; i < this.list.size(); i++) {
-            result.add((T) this.list.get(i));
+            result.add((Y) this.list.get(i));
         }
         return result;
     }
