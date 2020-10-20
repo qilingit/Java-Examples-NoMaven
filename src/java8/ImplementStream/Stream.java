@@ -1,23 +1,21 @@
 package java8.ImplementStream;
 
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Stream<T, U> {
+public class Stream<T> {
     List<T> list;
     public Stream(List<T> list) {
         this.list = list;
     }
     @SafeVarargs
-    public static <T, U> Stream<T, U> of (T... list) {
+    public static <T> Stream<T> of (T... list) {
         List<T> result = new ArrayList<>(Arrays.asList(list));
         return new Stream<>(result);
     }
 
-    public Stream<T, U> filter(Predicate<T> predicate) {
+    public Stream<T> filter(Predicate<T> predicate) {
         List<T> result = new ArrayList<>();
         for(T s: this.list) {
             if(predicate.condition(s)) {
@@ -27,7 +25,7 @@ public class Stream<T, U> {
         return new Stream<>(result);
     }
 
-    public Stream<T, U> limit(int nb) {
+    public Stream<T> limit(int nb) {
         List<T> result = new ArrayList<>();
 
         if(nb < 0) {
@@ -48,7 +46,7 @@ public class Stream<T, U> {
     /**
      * To discuss
      */
-    public Stream<U, T> map(Function<T, U> function) {
+    public <U> Stream<U> map(Function<T, U> function) {
         List<U> result = new ArrayList<>();
 
         for(T s: this.list) {
@@ -58,11 +56,7 @@ public class Stream<T, U> {
         return new Stream<>(result);
     }
 
-    public <Y> List<Y> toList() {
-        List<Y> result = new ArrayList<>();
-        for(int i = 0; i < this.list.size(); i++) {
-            result.add((Y) this.list.get(i));
-        }
-        return result;
+    public List<T> toList() {
+        return this.list;
     }
 }
